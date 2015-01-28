@@ -1,2 +1,2 @@
-# freezing-octo-dubstep
+# FreezingOctoDubstep
 An educational physics simulator.
