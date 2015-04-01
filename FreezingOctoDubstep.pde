@@ -1,20 +1,23 @@
-void setup(){ size(600,700); frameRate(60); }
+void setup(){ size(600,700); frameRate(60); background(255); }
 
 float BallY=200;
 float V=0.8;
 float A=1.2;
 int EndState=0;
+float PosGraphX=50;
+
 void draw()
 
 { //BALL PHYSICS
   float time0=millis();
   time0=time0/1000;
   
-  background(255);
+  //background(255);
+  fill(255); ellipse(500,BallY,50,50);
   fill(128,0,128); ellipse(500,BallY,50,50);
   BallY=BallY+V; V+=A;
-  if(BallY>=600){ V=V*0.8; V=-V; /*println("BOUNCE")*/; 
-                  if (abs(V)<=3.97){ BallY=600; V=0; A=0; EndState=1; }}
+  if(BallY>=600){ BallY=600; V=V*.7; V=-V; /*println("BOUNCE")*/; 
+                  if (abs(V)<5){ BallY=600; V=0; A=0; EndState=1; }}
   
   println(BallY);
   //GRAPHS SETUP
@@ -30,7 +33,7 @@ void draw()
  
   float POS=600-BallY;
   String POS1 = "X = " + POS;
-  String V1 = "V = " + V;
+  String V1 = "V = " + -V;
   String A1 = "A = " + A;
   textSize(16); 
   text(V1,410,335);
@@ -38,5 +41,8 @@ void draw()
   text(POS1,410,135);
   text(s,50,675);
   //GRAPHING
-  float PosGraphY = float(POS)*(150/400);
+  float PosGraphY = POS/2;
+  fill(255,0,0); strokeWeight(3); stroke(255,0,0); 
+  ellipse(PosGraphX,200-PosGraphY,5,5); PosGraphX+=(1.5);
+  
 }
