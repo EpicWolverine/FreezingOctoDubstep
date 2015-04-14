@@ -20,7 +20,7 @@ void draw()
   if(BallY>=600){ BallY=600; V=V*.7; V=-V; /*println("BOUNCE")*/; 
                   if (abs(V)<5){ BallY=600; V=0; A=0; EndState=1; }}
   
-  println(BallY);
+  //println(BallY);
   //GRAPHS SETUP
   fill(0); stroke(0); strokeWeight(2);
   line(50,50,50,200); line(50,200,400,200); 
@@ -29,8 +29,11 @@ void draw()
   //TIMING
   //float time1=millis()-time0;
   String s = "t = " + time0;
-  if(EndState==1){ float time2=time0; s = "t = " + time2;}
-  else{  }
+  if(EndState==1 && time0 >= 5){ 
+    while(true);
+  }
+  else{
+  }
  
   float POS=600-BallY;
   String POS1 = "X = " + POS;
@@ -43,14 +46,15 @@ void draw()
   text(s,50,675);
   
   //GRAPHING
-  float PosGraphY = POS/2;
+  //position
+  float PosGraphY = POS/3;
   fill(255,0,0); 
   strokeWeight(3); 
   stroke(255,0,0); 
   ellipse(PosGraphX,200-PosGraphY,5,5); 
   PosGraphX+=(1.5);
   
-  PosPoints.append(POS/2);
+  PosPoints.append(POS/3);
   //println(PosPoints);
   if(PosPoints.size() != 1){
     for(int point = 1; point < PosPoints.size(); point++){
