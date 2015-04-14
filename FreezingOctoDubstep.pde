@@ -42,7 +42,7 @@ void draw()
   float POS=600-BallY;
   String POS1 = "X = " + POS;
   String V1 = "V = " + -V;
-  String A1 = "A = " + A;
+  String A1 = "A = " + -A;
   textSize(16); 
   text(V1,410,335);
   text(A1,410,535);
@@ -66,14 +66,14 @@ void draw()
     }
   }  
   //velocity
-  float VelGraphY = V;
+  float VelGraphY = -V;
   fill(255,0,0); 
   strokeWeight(3); 
   stroke(255,0,0); 
   ellipse(VelGraphX,325-VelGraphY,5,5); 
   VelGraphX+=(1.5);
   
-  VelPoints.append(V);
+  VelPoints.append(-V);
   //println(VelPoints);
   if(VelPoints.size() != 1){
     for(int point = 1; point < VelPoints.size(); point++){
@@ -81,14 +81,14 @@ void draw()
     }
   }
   //acceleration
-  float AccGraphY = A*5;
+  float AccGraphY = -A*5;
   fill(255,0,0); 
   strokeWeight(3); 
   stroke(255,0,0); 
   ellipse(AccGraphX,525-AccGraphY,5,5); 
   AccGraphX+=(1.5);
   
-  AccPoints.append(A*5);
+  AccPoints.append(-A*5);
   //println(VelPoints);
   if(AccPoints.size() != 1){
     for(int point = 1; point < AccPoints.size(); point++){
