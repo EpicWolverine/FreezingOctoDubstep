@@ -6,13 +6,14 @@ float A=1.2;
 int EndState=0;
 float PosGraphX=50;
 
-void draw()
+FloatList PosPoints = new FloatList();
 
+void draw()
 { //BALL PHYSICS
   float time0=millis();
   time0=time0/1000;
   
-  //background(255);
+  background(255);
   fill(255); ellipse(500,BallY,50,50);
   fill(128,0,128); ellipse(500,BallY,50,50);
   BallY=BallY+V; V+=A;
@@ -40,9 +41,20 @@ void draw()
   text(A1,410,535);
   text(POS1,410,135);
   text(s,50,675);
+  
   //GRAPHING
   float PosGraphY = POS/2;
-  fill(255,0,0); strokeWeight(3); stroke(255,0,0); 
-  ellipse(PosGraphX,200-PosGraphY,5,5); PosGraphX+=(1.5);
+  fill(255,0,0); 
+  strokeWeight(3); 
+  stroke(255,0,0); 
+  ellipse(PosGraphX,200-PosGraphY,5,5); 
+  PosGraphX+=(1.5);
   
+  PosPoints.append(POS/2);
+  //println(PosPoints);
+  if(PosPoints.size() != 1){
+    for(int point = 1; point < PosPoints.size(); point++){
+      line(50+(1.5*(point-1)), 200-PosPoints.get(point-1), 50+(1.5*(point)), 200-PosPoints.get(point));
+    }
+  }
 }
