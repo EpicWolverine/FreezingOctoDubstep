@@ -5,8 +5,10 @@ float V=0.8;
 float A=1.2;
 int EndState=0;
 float PosGraphX=50;
+float VelGraphX=50;
 
 FloatList PosPoints = new FloatList();
+FloatList VelPoints = new FloatList();
 
 void draw()
 { //BALL PHYSICS
@@ -60,5 +62,20 @@ void draw()
     for(int point = 1; point < PosPoints.size(); point++){
       line(50+(1.5*(point-1)), 200-PosPoints.get(point-1), 50+(1.5*(point)), 200-PosPoints.get(point));
     }
-  }
+  }  
+  //velocity
+  float VelGraphY = V;
+  fill(255,0,0); 
+  strokeWeight(3); 
+  stroke(255,0,0); 
+  ellipse(VelGraphX,325-VelGraphY,5,5); 
+  VelGraphX+=(1.5);
+  
+  VelPoints.append(V);
+  //println(VelPoints);
+  if(VelPoints.size() != 1){
+    for(int point = 1; point < VelPoints.size(); point++){
+      line(50+(1.5*(point-1)), 325-VelPoints.get(point-1), 50+(1.5*(point)), 325-VelPoints.get(point));
+    }
+  } 
 }
