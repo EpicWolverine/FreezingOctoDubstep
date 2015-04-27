@@ -6,9 +6,9 @@ int EndState;
 float PosGraphX;
 float VelGraphX;
 float AccGraphX;
-FloatList PosPoints;
-FloatList VelPoints;
-FloatList AccPoints;
+ArrayList<Float> PosPoints;
+ArrayList<Float> VelPoints;
+ArrayList<Float> AccPoints;
 
 void setup(){ 
   size(600,700);
@@ -24,9 +24,9 @@ void setup(){
   PosGraphX=50;
   VelGraphX=50;
   AccGraphX=50;
-  PosPoints = new FloatList();
-  VelPoints = new FloatList();
-  AccPoints = new FloatList();
+  PosPoints = new ArrayList<Float>();
+  VelPoints = new ArrayList<Float>();
+  AccPoints = new ArrayList<Float>();
 }
 
 void draw(){ 
@@ -47,22 +47,21 @@ void draw(){
     fill(128,0,128); ellipse(500,BallY,50,50);
     BallY=BallY+V; V+=A;
     if(BallY>=600){ BallY=600; V=V*.7; V=-V; /*println("BOUNCE")*/; 
-                    if (abs(V)<5){ BallY=600; V=0; A=0; EndState=1; }}
+    if (abs(V)<5){ BallY=600; V=0; A=0; EndState=1; }}
     
-    //println(BallY);
     //GRAPHS SETUP
     fill(0); stroke(0); strokeWeight(2);
     line(50,50,50,200); line(50,200,400,200); 
     line(50,250,50,400); line(50,325,400,325);
     line(50,450,50,600); line(50,525,400,525);
+    
     //TIMING
     //float time1=millis()-time0;
-    String s = "t = " + time0;
-   
+    String s = "t = " + truncate(time0);
     float POS=600-BallY;
-    String POS1 = "X = " + POS;
-    String V1 = "V = " + -V;
-    String A1 = "A = " + -A;
+    String POS1 = "X = " + truncate(POS);
+    String V1 = "V = " + truncate(-V);
+    String A1 = "A = " + truncate(-A);
     textSize(16);
     textAlign(LEFT);
     text(POS1,410,135);
@@ -82,7 +81,7 @@ void draw(){
       EndState=1;
     }
     
-    PosPoints.append(POS/3);
+    PosPoints.add(POS/3);
     //println(PosPoints);
     if(PosPoints.size() != 1){
       for(int point = 1; point < PosPoints.size(); point++){
@@ -97,7 +96,7 @@ void draw(){
     ellipse(VelGraphX,325-VelGraphY,5,5); 
     VelGraphX+=(1.5);
     
-    VelPoints.append(-V);
+    VelPoints.add(-V);
     //println(VelPoints);
     if(VelPoints.size() != 1){
       for(int point = 1; point < VelPoints.size(); point++){
@@ -112,7 +111,7 @@ void draw(){
     ellipse(AccGraphX,525-AccGraphY,5,5); 
     AccGraphX+=(1.5);
     
-    AccPoints.append(-A*5);
+    AccPoints.add(-A*5);
     //println(VelPoints);
     if(AccPoints.size() != 1){
       for(int point = 1; point < AccPoints.size(); point++){
@@ -134,4 +133,11 @@ void mouseClicked() {
       setup();
     }
   }
+}
+
+float truncate(float x){ //via https://processing.org/discourse/beta/num_1224871364.html
+  if ( x > 0 )
+    return float(floor(x * 100))/100;
+  else
+    return float(ceil(x * 100))/100;
 }
